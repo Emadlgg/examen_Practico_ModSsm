@@ -144,6 +144,8 @@ Z5 (Oeste periférico)  & 44.0\% & 22.0\% & 34.0\% & 0.436 & 36.9\% & 63.1\% \\
 \bottomrule
 \end{tabular}%
 }
+\caption{Ratio de preservación estructural y fracción de viviendas dañadas habitables por zona.}
+\label{tab:habitabilidad}
 \end{table}
 
 Los resultados de la Tabla~\ref{tab:habitabilidad} y la Figura~\ref{fig:hab} concuerdan de forma sorprendente con los datos empíricos de la emergencia: en Z4, el 93.1\% de las viviendas dañadas resultan habitables, lo que explica por qué en esa zona la demanda de albergue prácticamente no crece a lo largo de las 72 horas (+910 personas). En cambio, en Z5 el 63.1\% de las viviendas dañadas son inhabitables, lo que desata una salida continua de damnificados hacia los refugios (+6,900 personas tras las primeras 6 horas).
@@ -168,7 +170,7 @@ Al analizar las trayectorias de ocupación e identificar los momentos clave de l
 
 \begin{enumerate}
     \item \textbf{Saturación y colapso inmediato en cuatro zonas:} En las zonas Z1, Z2, Z3 y Z5, el sistema supera el umbral del 80\% y se llena al 100\% de su capacidad en el \textbf{Bloque 0 (las primeras 6 horas)}. La desproporción entre personas buscando refugio y la capacidad instalada es crítica. El caso más grave es Z1 (Centro histórico), donde 11,470 personas demandan refugio ante un único albergue habilitado con capacidad para solo 400 personas (una demanda 28 veces superior a la oferta). En Z5 ocurre algo similar: 14,540 damnificados llegan a instalaciones con capacidad combinada de 1,500 cupos.
-    \item \textbf{La paradoja de capacidad ociosa en Z4:} La zona Z4 (Este comercial) es la \textbf{única que nunca se satura}. Inicia con un 21.7\% de ocupación y finaliza en 38.9\% (un promedio de 2,068 personas albergadas para una capacidad de 5,300 plazas). Esto significa que durante toda la emergencia existen más de 3,200 camas desocupadas en Z4, mientras en Z1 y Z5 decenas de miles de personas duermen a la intemperie.
+    \item \textbf{La paradoja de capacidad ociosa en Z4 (solo con datos propios):} Con base únicamente en el daño estructural reportado en nuestro Excel, la zona Z4 (Este comercial) es la \textbf{única que nunca se satura}. Inicia con un 21.7\% de ocupación y finaliza en 38.9\% (un promedio de 2,068 personas albergadas para una capacidad de 5,300 plazas). Esto significa que durante toda la emergencia existen más de 3,200 camas desocupadas en Z4, mientras en Z1 y Z5 decenas de miles de personas duermen a la intemperie. \textit{Adelanto: esta conclusión no se sostiene al incorporar el output real del Grupo 6 --- ver Sección 4.}
     \item \textbf{Estabilización del sistema:} La llegada de nuevos desplazados se desacelera marcadamente entre las 36 y 48 horas (bloques T6 a T8), momento en el cual las curvas de ocupación y de personas sin alojamiento alcanzan una meseta estable.
 \end{enumerate}
 
@@ -218,11 +220,12 @@ En las primeras 6 horas, más de 25,000 personas no consiguen espacio en los alb
     \item \textbf{Presión sobre otras zonas:} Esta masa de población sin techo genera tensiones sociales y presiona por migrar hacia zonas con mejores servicios como Z4.
 \end{itemize}
 
-\subsection{Entregas a los Grupos 2 y 3}
+\subsection{Estimación inicial para los Grupos 2 y 3 (pre-intercambio)}
 \begin{itemize}
     \item \textbf{Demanda médica para Grupo 2 (18\% de desplazados):} Al final de las 72 horas, la ciudad acumula una demanda esperada de \textbf{9,147 atenciones médicas} (IC 95\%: [7,908; 10,362]). La mayor parte se concentra en Z5 (3,849 pacientes) y Z1 (2,808 pacientes), señalando con claridad dónde deben reforzarse los hospitales de campaña.
     \item \textbf{Demanda de víveres para Grupo 3 (100\% de albergados):} Debido a que los albergues de cuatro zonas se llenan desde el inicio, la demanda de raciones se congela rápidamente en \textbf{8,568 raciones por bloque de 6h} a nivel ciudad, de las cuales 2,068 corresponden a Z4, 2,400 a Z3, 2,200 a Z2, 1,500 a Z5 y apenas 400 a Z1.
 \end{itemize}
+Esta es la estimación con la que trabajamos internamente antes del intercambio; \textbf{no} es la que finalmente se entregó a los Grupos 2 y 3, porque el intercambio se trabajó de forma secuencial (ver Sección 4.2).
 
 % ==============================================================================
 % SECCIÓN 4: INCORPORACIÓN DEL INTERCAMBIO PRESENCIAL
@@ -230,29 +233,35 @@ En las primeras 6 horas, más de 25,000 personas no consiguen espacio en los alb
 \section{Incorporación del intercambio de información}
 
 \subsection{Intercambio con Grupo 6 y respuesta a la Pregunta 2}
-Durante el intercambio presencial, recibimos de parte del Grupo 6 la proyección del flujo de evacuación calculada a partir de su modelo de comportamiento poblacional. 
-
-\textbf{¿Qué supuesto de nuestro modelo inicial era incorrecto y cómo se corrigió?}
-El supuesto inicial que resultó incorrecto fue asumir que las personas desplazadas llegaban de golpe a los albergues desde el primer instante (T0), siguiendo la curva estática de los datos preliminares. El Grupo 6 nos explicó que esto no ocurre así en la realidad por dos factores principales:
-\begin{enumerate}
-    \item En las zonas más dañadas (Z1 y Z5), entre el 35\% y el 50\% de las personas afectadas no pueden salir por sus propios medios en las primeras 12 horas debido a escombros en las calles, lesiones o familiares atrapados, dependiendo de la ayuda de rescatistas (coordinados por Grupo 5).
-    \item La confusión inicial, las noticias falsas y el temor a que saqueen sus hogares hacen que muchas familias decidan quedarse cerca de sus viviendas durante las primeras horas en lugar de dirigirse de inmediato a un albergue.
-\end{enumerate}
-Para corregirlo, adaptamos nuestro flujo de entrada $N_z(t)$: redujimos la llegada masiva en T0 y T1 y trasladamos ese contingente hacia los bloques T2 (12--18h) y T3 (18--24h), momento en que las cuadrillas de rescate logran habilitar vías y evacuar a la población retenida.
+Durante el intercambio presencial, el Grupo 6 nos entregó formalmente el archivo \texttt{output\_a\_flujo\_desplazados.csv}: la proyección real de evacuación por zona y bloque, calculada con su modelo de comportamiento poblacional (ABM) y separada en dos destinos por persona: \textit{refugio oficial} y \textit{otra zona / redes informales}. Sustituimos únicamente el input $N_z(t)$ de nuestra función \texttt{simular()} por la columna \texttt{nuevos\_hacia\_refugio\_oficial} de ese archivo —la única que compite por la capacidad de los albergues formales que modelamos— sin modificar la función, las capacidades operativas ni ninguna otra parte del modelo.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.85\linewidth]{grafica6_comparativa_intercambio.png}
-    \caption{Comparación de la llegada de desplazados y acumulación de personas sin albergue antes y después de incorporar la información del Grupo 6.}
+    \includegraphics[width=0.95\linewidth]{grafica6_comparativa_intercambio.png}
+    \caption{Comparación de la llegada de desplazados y acumulación de personas sin albergue, antes y después de incorporar la proyección real del Grupo 6 (suma de las 5 zonas).}
     \label{fig:intercambio}
 \end{figure}
 
 \textbf{¿En cuántas horas difiere el momento de colapso de los albergues entre ambas estimaciones?}
 \begin{itemize}
-    \item En \textbf{Z1 y Z5}, el momento en que se supera el 80\% \textbf{no cambia (difiere en 0 horas)}. La capacidad de estos albergues es tan pequeña frente al tamaño de la población damnificada que, aun reteniendo a la mitad de la gente en sus casas durante las primeras 12 horas, la cantidad de personas que llega en T0 sigue superando con creces los 400 cupos de Z1 y los 1,500 de Z5.
-    \item No obstante, la gran diferencia radica en el \textbf{colapso del espacio público exterior}: el pico masivo de personas desbordando las calles alrededor de los albergues no ocurre al amanecer, sino que \textbf{se retrasa 12 horas} (se traslada a la ventana de 12 a 18 horas).
-    \item En \textbf{Z3}, donde la relación demanda/capacidad es más ajustada, el colapso del albergue se retrasa en \textbf{6 horas} (pasa de T0 a T1), abriendo una ventana de oportunidad invaluable para habilitar instalaciones adicionales.
+    \item En \textbf{Z1, Z2, Z3 y Z5} el momento de saturación (>80\%) \textbf{no cambia: 0 horas de diferencia}. Ambas estimaciones colapsan desde el Bloque 0 (0--6h) en esas cuatro zonas.
+    \item En \textbf{Z4} el cambio es \textbf{cualitativo, no temporal}: en el escenario base Z4 \textbf{nunca} cruzaba el 80\% (máximo 38.9\%); con el flujo real del Grupo 6, Z4 satura casi de inmediato (96.5\% en el Bloque 0, 100\% desde el Bloque 1). No es que el colapso se adelante un número de horas: es que una zona que antes no colapsaba, ahora sí lo hace desde el primer bloque.
+    \item La diferencia real entre ambas estimaciones no está, entonces, en el \textit{momento} de colapso, sino en la \textbf{magnitud}: el total de personas sin alojamiento al final de las 72h pasa de \textbf{42,200} (base) a \textbf{118,611} (Grupo 6) —casi 2.8 veces más— y la demanda médica total pasa de 9,137 a 23,474 personas (2.6 veces más).
 \end{itemize}
+
+\textbf{¿Qué supuesto de nuestro modelo inicial era incorrecto y cómo se corrigió?}
+El supuesto que resultó incorrecto no fue uno de \textit{retención o retraso en la llegada} —hipótesis razonable que habíamos planteado antes de recibir el output formal— sino uno más fundamental: el \textbf{volumen total de demanda de refugio formal}. Nuestro modelo base estimaba esa demanda a partir de la variable ``necesitan albergue urgente'' del propio Excel de daño estructural, que acumula 50,760 personas en toda la ciudad al final de las 72h. El output real del Grupo 6 —que ya filtra a quienes efectivamente buscan un albergue formal, en lugar de quedarse con familiares o desplazarse a otra zona— proyecta un total de \textbf{130,411 personas}: 2.6 veces más que la estimación basada solo en daño estructural.
+
+Esto invalida el hallazgo más visible de nuestro análisis pre-intercambio (Sección 3, ``paradoja de capacidad ociosa en Z4''): Z4 parecía tener margen porque su daño estructural reportado es bajo, pero el modelo de comportamiento del Grupo 6 muestra que una fracción importante de la población de la ciudad —no solo de Z4— igual intenta acceder a refugio formal en cantidades que la capacidad de Z4 tampoco alcanza a absorber. \textbf{Corrección aplicada:} reemplazamos únicamente el input $N_z(t)$ de \texttt{simular()} por el dato real del Grupo 6, conservando intacta la función y las capacidades operativas, tal como estaba previsto desde el diseño del modelo (Sección 2).
+
+\subsection{Entrega final actualizada a los Grupos 2 y 3}
+El intercambio de este examen se trabajó de forma \textbf{secuencial}: primero se recibió el output formal del Grupo 6 y, ya con ese dato incorporado, se entregó la versión final de la demanda a los Grupos 2 y 3 —no la estimación pre-intercambio de la Sección 3.3—. Con \texttt{resultado\_grupo6} (Sección 23), los outputs finales entregados son:
+\begin{itemize}
+    \item \textbf{Demanda médica para Grupo 2:} la demanda total a las 72h sube de 9,147 a \textbf{23,474 atenciones médicas} (+156\%). La mayor concentración se mantiene en Z5 (6,120) y ahora también en Z3 (5,684), que en la estimación inicial no destacaba.
+    \item \textbf{Demanda de víveres para Grupo 3:} sube de 8,568 a \textbf{11,800 raciones por bloque de 6h} a nivel ciudad (capacidad operativa total de las 5 zonas), ya que ahora las 5 zonas —incluida Z4— llegan a su capacidad máxima en vez de solo 4.
+    \item \textbf{Mapa de saturación de albergues:} se actualiza para reflejar que Z4 también supera el 80\% en el Bloque 0 (96.5\%), en vez de nunca saturarse.
+\end{itemize}
+Los tres archivos de \texttt{outputs/} entregados a Grupo 2, Grupo 3 y ambos (mapa de saturación) contienen esta versión final (Sección 24.2 del notebook); las cifras de la Sección 3.3 quedan documentadas únicamente como la estimación inicial, según lo exige el requisito de trazabilidad del intercambio.
 
 % ==============================================================================
 % SECCIÓN 5: LIMITACIONES Y PROPUESTAS DE MEJORA
@@ -260,7 +269,7 @@ Para corregirlo, adaptamos nuestro flujo de entrada $N_z(t)$: redujimos la llega
 \section{Limitaciones del modelo y propuestas de mejora}
 
 \subsection{Limitación 1: Aislamiento estricto entre zonas}
-El modelo asume que cada zona opera de forma completamente aislada ($\text{Reubicados}_z = 0$). Este supuesto genera una situación poco realista: mientras en Z1 y Z5 hay más de 35,000 personas en la calle, en Z4 hay más de 3,200 camas desocupadas que nadie utiliza. En una emergencia real, las familias se desplazan a zonas vecinas o las autoridades organizan transporte en autobuses.
+El modelo asume que cada zona opera de forma completamente aislada ($\text{Reubicados}_z = 0$). En el escenario pre-intercambio, esto generaba una situación poco realista: mientras en Z1 y Z5 había más de 35,000 personas en la calle, en Z4 parecían existir más de 3,200 camas desocupadas que nadie utilizaba. Sin embargo, el output real del Grupo 6 (Sección 4) muestra que Z4 tampoco tiene margen real una vez que se considera la demanda de toda la ciudad, por lo que la reubicación interzonal ya no es una solución de holgura gratuita: cualquier estrategia de reubicación tendría que competir con instalaciones adicionales (carpas, escuelas, galpones), no solo con cupos ya disponibles.
 
 \textbf{Propuesta de mejora:} Incorporar una tasa de reubicación interzonal que traslade personas sin alojamiento de las zonas saturadas hacia los albergues con cupos libres, condicionada a la accesibilidad de las calles que reporta el Grupo 4.
 
